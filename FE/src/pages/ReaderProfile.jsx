@@ -11,7 +11,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import BookIcon from '@mui/icons-material/Book';
 import { Outlet } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { userContext } from '../components/Context'
 
 const menuItems = [
   {
@@ -42,7 +41,6 @@ const menuItems = [
 ]
 
 function ReaderProfile(props) {
-  const { loggedInUser } = useContext(userContext)
   return (
     <div>
       <HeaderPage />
@@ -53,7 +51,7 @@ function ReaderProfile(props) {
           margin: '0 auto',
           width: '90%'
         }}>
-        {loggedInUser.auth ? (
+        {auth ? (
           <>
             <Stack>
               <SideBar menuItems={menuItems} />

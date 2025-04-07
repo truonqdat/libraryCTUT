@@ -1,17 +1,41 @@
+import mongoose from "mongoose";
+
 const borrowRecordSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  bookId: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
-  reservationId: {
+  reservationCode: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Reservation",
-    required: true,
   },
+  books: [
+    {
+      bookId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Book",
+        required: true,
+      },
+      barcode: { type: String, required: true }, // QR code từng bản copy
+      borrowedAt: { type: Date, default: Date.now }, // Thời điểm mượn
+      dueDate: { type: Date, required: true }, // Hạn trả
+      returnedAt: { type: Date }, // Ngày trả thực tế
+      status: {
+        type: String,
+        enum: ["Borrowed", "Returned", "Overdue", "Lost"],
+        default: "Borrowed",
+      },
+    },
+  ],
+  // Trạng thái tổng của phiếu mượn (tùy chọn)
   status: {
     type: String,
-    enum: ["Borrowed", "Returned", "Overdue"],
-    default: "Borrowed",
+    enum: ["Active", "Completed", "PartiallyReturned"],
+    default: "Active",
   },
-  borrowedAt: { type: Date, default: Date.now },
-  dueDate: { type: Date, required: true },
-  returnedAt: { type: Date },
+  fines: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Fine",
+    },
+  ],
 });
+
+export default mongoose.model("BorrowRecord", borrowRecordSchema);

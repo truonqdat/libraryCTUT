@@ -7,7 +7,7 @@ const theme = createTheme({
       palette: {
         primary: {
           // blue
-          main: '#005ac7',
+          main: '#264480',
           light: '#00c0ff',
           dark: '#015bb0'
         },
@@ -45,7 +45,7 @@ const theme = createTheme({
       },
       text: {
         primary: {
-          main: '#757574'
+          main: '#E0DCDC'
         }
       },
       boxShadow: {

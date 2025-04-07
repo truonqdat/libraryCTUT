@@ -2,33 +2,45 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    googleId: { type: String, required: true, unique: true }, // ID Google OAuth
     email: {
       type: String,
+      trim: true,
       required: true,
       unique: true,
+    },
+    phoneNumber: {
+      type: String,
       trim: true,
       validate: {
-        validator: function (value) {
-          return value.endsWith("@student.ctuet.edu.vn"); // Kiểm tra email trường
-        },
-        message: "Email phải thuộc hệ thống trường!",
+        validator: (value) => /^[0-9]{10}$/.test(value),
+        message: "Số điện thoại phải có 10 số!",
       },
     },
-    fullName: { type: String, required: true, trim: true },
+    dateOfBirth: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      enum: ["Male", "Female", "Other"],
+    },
+    fullName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     role: {
       type: String,
-      enum: ["admin", "librarian", "student"],
-      required: true,
+      enum: ["user", "librarian", "admin"],
+      default: "user",
     },
-    avatar: {
-      type: String,
-      default:
-        "https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Pic-Clip-Art-Background.png",
+    lock: {
+      type: Boolean,
+      default: false,
     },
-    lock: { type: Boolean, default: false }, // Khóa tài khoản nếu vi phạm
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const User = mongoose.model("User", userSchema);

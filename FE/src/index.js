@@ -5,18 +5,18 @@ import { ThemeProvider } from "@mui/material/styles";
 import { router } from "./routes/Route";
 import { RouterProvider } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle/GlobalStyle";
-import { ContextProvide } from "./components/Context";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <React.StrictMode>
-  <ThemeProvider theme={theme}>
-    <GlobalStyle>
-      <ContextProvide>
-        <RouterProvider router={router} />
-      </ContextProvide>
-    </GlobalStyle>
-  </ThemeProvider>
-  // </React.StrictMode>
-  //sao bỏ cái strictmode dị
+  <React.StrictMode>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle>
+          <RouterProvider router={router} />
+        </GlobalStyle>
+      </ThemeProvider>
+    </Provider>
+  </React.StrictMode>
 );

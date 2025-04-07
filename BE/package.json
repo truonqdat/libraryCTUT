@@ -1,11 +1,12 @@
 {
   "name": "thuchanh",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node server.js"
+    "start": "nodemon --exec babel-node src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -28,8 +29,10 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "formidable": "^3.5.2",
+    "google-auth-library": "^9.15.1",
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",
+    "mongoose": "^8.12.2",
     "mysql2": "^3.11.3",
     "nodemon": "^3.1.4",
     "redis": "^4.7.0",

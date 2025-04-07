@@ -10,13 +10,9 @@ import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { Stack, Collapse } from "@mui/material";
 
-import { userContext } from './Context';
-
 const SideBar = ({ menuItems }) => {
   const theme = useTheme();
   const [open, setOpen] = useState({});
-  // const {logoutContext} = useContext(userContext)
-  const { loggedInUser } = useContext(userContext);
   const handleToggle = (itemText) => {
     setOpen((prev) => ({ ...prev, [itemText]: !prev[itemText] }));
   };
@@ -89,31 +85,27 @@ const SideBar = ({ menuItems }) => {
             )}
           </div>
         ))}
-        
-        {loggedInUser.auth && (
-           <Stack
-           sx={{
-             "&:hover": {
-               color: theme.palette.yellow.main,
-             },
-           }}
-           // onClick={() => item.subItems && handleToggle(item.text)}
-         >
-           <Link
-             to="http://localhost:3001/api/v1/dang-xuat-user"
-             style={{ textDecoration: "none", color: "inherit" }}
-           >
-             <MenuItem sx={{ p: "12px 10px" }}>
-               <ListItemIcon sx={{ color: "inherit" }}>
-                 <LogoutIcon fontSize="medium" />
-               </ListItemIcon>
-               <ListItemText primary="Đăng xuất" sx={{ color: "inherit" }} />
-             </MenuItem>
-           </Link>
-         </Stack>
-        )}
-       
-        
+
+        <Stack
+          sx={{
+            "&:hover": {
+              color: theme.palette.yellow.main,
+            },
+          }}
+          // onClick={() => item.subItems && handleToggle(item.text)}
+        >
+          <Link
+            to="http://localhost:3001/api/v1/dang-xuat-user"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <MenuItem sx={{ p: "12px 10px" }}>
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <LogoutIcon fontSize="medium" />
+              </ListItemIcon>
+              <ListItemText primary="Đăng xuất" sx={{ color: "inherit" }} />
+            </MenuItem>
+          </Link>
+        </Stack>
       </MenuList>
     </Paper>
   );

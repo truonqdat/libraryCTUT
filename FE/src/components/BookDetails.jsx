@@ -11,7 +11,7 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import bookService from "../services/bookService";
-import { userContext } from "./Context";
+
 
 function BookDetails(props) {
   const [book, setBook] = React.useState([]);
@@ -26,8 +26,7 @@ function BookDetails(props) {
 
   const navigate = useNavigate();
 
-  const { loggedInUser, loginContext, logoutContext } =
-    React.useContext(userContext);
+
 
   React.useEffect(() => {
     const fetchBook = async () => {
@@ -56,16 +55,9 @@ function BookDetails(props) {
   };
 
   const handleBorrowRequest = async () => {
-    if (!loggedInUser.auth) {
-      setNotification({
-        message: "Bạn cần đăng nhập để yêu cầu mượn sách.",
-        open: true,
-      });
-      return;
-    }
     try {
       const response = await bookService.requestBook({
-        user: loggedInUser.userData.id,
+        user: userData.id,
         book: id,
       });
       console.log(response);

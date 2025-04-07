@@ -2,15 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { userContext } from '../Context';
 import favoriteBooksService from "../../services/favoriteBooksService";
 import CircularProgress from '@mui/material/CircularProgress';
 
 const FavoriteButton = ({ bookId }) => {
-  const { loggedInUser } = useContext(userContext);
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
-  const userId = loggedInUser ? loggedInUser.userData.id : null;
 
   // Chỉ kiểm tra trạng thái yêu thích khi có userId
   useEffect(() => {

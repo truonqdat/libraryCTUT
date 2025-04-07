@@ -1,11 +1,11 @@
 import { Divider, Stack, Typography, useTheme } from '@mui/material';
 import React, { useState, useEffect, useContext } from 'react';
 import Category from './CategoryBook';
-import { userContext } from './Context';
+
 import favoriteBooksService from "../services/favoriteBooksService";
 
 function FavoritBooks(props) {
-  const { loggedInUser } = useContext(userContext);
+
 
   const [favoriteBooks, setFavoriteBooks] = useState([]);
 

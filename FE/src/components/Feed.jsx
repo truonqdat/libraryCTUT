@@ -33,7 +33,7 @@ function Feed(props) {
   return (
     <div>
       <SearchInput />
-      <CategoryBook linkTo={"/sach-moi"} title={"Sách mới"} bookList={booksNews} isHomePage={true} />
+      <CategoryBook linkTo={"/sach-moi"} title={"Điểm sách mới"} bookList={booksNews} isHomePage={true} />
       <CategoryNews linkTo={"/tin-tuc"} title={"Tin tức mới"} newsList={newsNews} isHomePage={true} />
     </div>
   );

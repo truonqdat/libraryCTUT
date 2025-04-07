@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { createBrowserRouter } from 'react-router-dom'
-import Login from '../pages/Login'
 import Home from '../pages/Home'
 import ReaderProfile from '../pages/ReaderProfile'
 import PageNotFound from '../pages/PageNotFound'
@@ -110,11 +109,6 @@ export const router = createBrowserRouter([
         element:<AboutUs/>
       }
     ],
-    errorElement: <PageNotFound />
-  },
-  {
-    path: '/dang-nhap',
-    element: <Login />,
     errorElement: <PageNotFound />
   },
   {

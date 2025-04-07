@@ -11,13 +11,10 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import categoryService from "../services/categoryService";
-import { userContext } from "../components/Context";
 
 function Home(props) {
   const [categories, setCategories] = useState([]);
   const [visible, setVisible] = useState(false);
-  const { loggedInUser, loginContext, logoutContext } = useContext(userContext);
-  // console.log(loggedInUser);
   
   useEffect(() => {
     const fetchCategories = async () => {

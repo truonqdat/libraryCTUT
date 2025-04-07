@@ -2,17 +2,15 @@ import { Divider, Stack, Typography, useTheme } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
 import RentItem from "./RentItem";
 import userService from "../services/userService";
-import { userContext } from "./Context";
 
 function RentHistory(props) {
   const theme = useTheme();
-  const { loggedInUser } = useContext(userContext);
   const [rentList, setRentList] = useState([]);
 
   const fetchBorrowedBooks = async () => {
     try {
       const response = await userService.getAllBorrowBook(
-        loggedInUser.userData.id
+        userData.id
       );
       setRentList(response);
     } catch (error) {

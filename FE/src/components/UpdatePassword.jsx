@@ -9,10 +9,8 @@ import {
 import React, { useState, useContext } from 'react'
 import SimpleSnackbar from './SimpleSnackbar'
 import userService from '../services/userService'
-import { userContext } from './Context'
 
 function UpdatePassword(props) {
-  const { loggedInUser } = useContext(userContext)
 
   const [formData, setFormData] = useState({
     oldPassword: '',
@@ -51,7 +49,7 @@ function UpdatePassword(props) {
     }
 
     const responseUpdate = await userService.updatePassword(
-      loggedInUser.userData.id,
+      userData.id,
       formData.oldPassword,
       formData.newPassword
     )

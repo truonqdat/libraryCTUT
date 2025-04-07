@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Divider, Stack, Typography, useTheme } from '@mui/material'
 import { styled } from '@mui/material'
-import { userContext } from './Context'
+
 import { format } from 'date-fns'
 
 const StyledStack = styled(Stack)(({ theme }) => ({
@@ -10,7 +10,6 @@ const StyledStack = styled(Stack)(({ theme }) => ({
 }))
 
 function Profile(props) {
-  const { loggedInUser } = useContext(userContext)
 
   const theme = useTheme()
   return (
@@ -88,7 +87,7 @@ function Profile(props) {
                         marginLeft: '5px',
                         textTransform: 'uppercase'
                       }}>
-                      {loggedInUser.userData.studentCode}
+                      {userData.studentCode}
                     </Typography>
                   </StyledStack>
                   <StyledStack>
@@ -107,7 +106,7 @@ function Profile(props) {
                         marginLeft: '5px',
                         textTransform: 'capitalize'
                       }}>
-                      {loggedInUser.userData.fullName}
+                      {userData.fullName}
                     </Typography>
                   </StyledStack>
                   <StyledStack>
@@ -144,7 +143,7 @@ function Profile(props) {
                         marginLeft: '5px'
                       }}>
                       {format(
-                        new Date(loggedInUser.userData.dateOfBirth),
+                        new Date(userData.dateOfBirth),
                         'dd/MM/yyyy'
                       )}
                     </Typography>
