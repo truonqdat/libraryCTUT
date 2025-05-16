@@ -51,7 +51,7 @@ function ReaderProfile(props) {
           margin: '0 auto',
           width: '90%'
         }}>
-        {auth ? (
+        {user ? (
           <>
             <Stack>
               <SideBar menuItems={menuItems} />

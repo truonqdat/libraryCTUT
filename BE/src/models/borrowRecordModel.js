@@ -22,6 +22,14 @@ const borrowRecordSchema = new mongoose.Schema({
         enum: ["Borrowed", "Returned", "Overdue", "Lost"],
         default: "Borrowed",
       },
+      extended: {
+        type: Boolean,
+        default: false,
+      },
+      extensionDays: {
+        type: Number,
+        default: 0,
+      }
     },
   ],
   // Trạng thái tổng của phiếu mượn (tùy chọn)

@@ -12,7 +12,18 @@ const authMiddleware = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: "Token không hợp lệ!" });
     }
-    req.user = user; // Lưu user vào request để dùng tiếp
+    req.user = user;
+
+    // Skip profile completion check for profile-related routes
+    if (req.path === "/profile" || req.path === "/google-login") {
+      return next();
+    }
+
+    // // Check if profile is incomplete
+    // if (!user.profileCompleted) {
+    //   return res.status(403).json({ message: "Vui lòng hoàn thiện thông tin hồ sơ trước!" });
+    // }
+
     next();
   });
 };

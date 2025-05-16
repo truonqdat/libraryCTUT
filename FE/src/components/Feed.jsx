@@ -12,7 +12,7 @@ function Feed(props) {
   React.useEffect(() => {
     const fetchBooksNew = async () => {
       try {
-        const booksNew = await bookService.getBooksNew();
+        const booksNew = await bookService.getAllBooks();
         setBooksNew(booksNew);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -33,8 +33,8 @@ function Feed(props) {
   return (
     <div>
       <SearchInput />
-      <CategoryBook linkTo={"/sach-moi"} title={"Điểm sách mới"} bookList={booksNews} isHomePage={true} />
-      <CategoryNews linkTo={"/tin-tuc"} title={"Tin tức mới"} newsList={newsNews} isHomePage={true} />
+      <CategoryBook linkTo={"/sach-moi"} title={"Tài liệu"} bookList={booksNews} isHomePage={true} />
+      {/* <CategoryNews linkTo={"/tin-tuc"} title={"Tin tức mới"} newsList={newsNews} isHomePage={true} /> */}
     </div>
   );
 }

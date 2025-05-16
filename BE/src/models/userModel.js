@@ -8,11 +8,17 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    studentCode: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
     phoneNumber: {
       type: String,
       trim: true,
       validate: {
-        validator: (value) => /^[0-9]{10}$/.test(value),
+        validator: (value) => !value || /^[0-9]{10}$/.test(value),
         message: "Số điện thoại phải có 10 số!",
       },
     },
@@ -34,6 +40,10 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
     lock: {
+      type: Boolean,
+      default: false,
+    },
+    profileCompleted: {
       type: Boolean,
       default: false,
     },

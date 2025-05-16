@@ -20,6 +20,9 @@ function CategoryAll(props) {
     setCurrentPage(pageNumber);
   };
 
+  console.log(books);
+  
+
   React.useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -31,6 +34,7 @@ function CategoryAll(props) {
           // Fetch all books if no category id
           bookList = await bookService.getAllBooks();
         }
+
         setBooks(bookList);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -40,9 +44,8 @@ function CategoryAll(props) {
   }, [id]);
 
   React.useEffect(() => {
-    setCurrentPage(1); 
+    setCurrentPage(1);
   }, [id]);
-
 
   const titleMap = {
     8: "Bài Giảng",
@@ -51,9 +54,9 @@ function CategoryAll(props) {
     11: "Luận án",
     12: "Luận văn",
     13: "Tiểu luận/ĐATN",
-    14: "Tiểu Thuyết"
+    14: "Tiểu Thuyết",
   };
-  
+
   const title = id in titleMap ? `Danh mục: ${titleMap[id]}` : "Danh mục";
 
   return (
@@ -82,5 +85,3 @@ function CategoryAll(props) {
   );
 }
 export default CategoryAll;
-
-

@@ -98,12 +98,12 @@ const SideBar = ({ menuItems }) => {
             to="http://localhost:3001/api/v1/dang-xuat-user"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <MenuItem sx={{ p: "12px 10px" }}>
+            {/* <MenuItem sx={{ p: "12px 10px" }}>
               <ListItemIcon sx={{ color: "inherit" }}>
                 <LogoutIcon fontSize="medium" />
               </ListItemIcon>
               <ListItemText primary="Đăng xuất" sx={{ color: "inherit" }} />
-            </MenuItem>
+            </MenuItem> */}
           </Link>
         </Stack>
       </MenuList>

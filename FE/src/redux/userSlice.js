@@ -1,11 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Kiểm tra nếu có dữ liệu user trong localStorage
-const savedUser = JSON.parse(localStorage.getItem("user")) || null;
+// Hàm helper để đọc từ localStorage an toàn
+const safeParse = (key) => {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  } catch (error) {
+    console.error(`Error parsing ${key} from localStorage:`, error);
+    return null;
+  }
+};
 
 const initialState = {
-  currentUser: savedUser,
-  isAuthenticated: savedUser ? true : false,
+  currentUser: safeParse("user"),
+  accessToken: localStorage.getItem("accessToken") || null,
+  isAuthenticated: !!localStorage.getItem("accessToken") && !!safeParse("user"),
 };
 
 const userSlice = createSlice({
@@ -13,20 +22,49 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.currentUser = action.payload;
+      const { user, token } = action.payload;
+      state.currentUser = user;
+      state.accessToken = token;
       state.isAuthenticated = true;
-      // Lưu user vào localStorage
-      localStorage.setItem("user", JSON.stringify(action.payload));
+      
+      try {
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("accessToken", token);
+      } catch (error) {
+        console.error("Error saving to localStorage:", error);
+      }
+    },
+    updateUser: (state, action) => {
+      state.currentUser = { ...state.currentUser, ...action.payload };
+      try {
+        localStorage.setItem("user", JSON.stringify(state.currentUser));
+      } catch (error) {
+        console.error("Error updating user in localStorage:", error);
+      }
+    },
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+      state.isAuthenticated = !!action.payload;
+      try {
+        localStorage.setItem("accessToken", action.payload);
+      } catch (error) {
+        console.error("Error saving token to localStorage:", error);
+      }
     },
     logout: (state) => {
       state.currentUser = null;
+      state.accessToken = null;
       state.isAuthenticated = false;
-      // Xóa user khỏi localStorage khi đăng xuất
-      localStorage.removeItem("user");
-      localStorage.removeItem("accessToken"); // Nếu bạn lưu token riêng
+      
+      try {
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+      } catch (error) {
+        console.error("Error clearing localStorage:", error);
+      }
     },
   },
 });
 
-export const { setUser, logout } = userSlice.actions;
+export const { setUser, updateUser, setAccessToken, logout } = userSlice.actions;
 export default userSlice.reducer;

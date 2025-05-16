@@ -1,5 +1,5 @@
 import { GoogleLogin } from "@react-oauth/google";
-import userService from "../services/userService";
+import userService from "../services/userService.js";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
 
@@ -10,23 +10,25 @@ const LoginPage = () => {
     try {
       const { credential } = response;
       const res = await userService.loginWithGoogle(credential);
-
+      
       localStorage.setItem("accessToken", res.accessToken);
-      
       const userRes = await userService.getUserProfile(res.accessToken);
-      
+
       dispatch(
         setUser({
-          fullName: userRes.fullName,
-          email: userRes.email,
-          _id: userRes._id,
-          lock: userRes.lock,
-          role: userRes.role,
-          isAuthenticated: true,
+          user: {
+            fullName: userRes.fullName,
+            email: userRes.email,
+            _id: userRes._id,
+            lock: userRes.lock,
+            role: userRes.role,
+          },
+          token: res.accessToken,
         })
       );
     } catch (error) {
-      console.error("Lỗi đăng nhập:", error.response?.data || error.message);
+      console.error("Login error:", error);
+      // Xử lý lỗi đăng nhập
     }
   };
 

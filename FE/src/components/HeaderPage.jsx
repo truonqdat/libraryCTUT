@@ -1,6 +1,7 @@
+// HeaderPage.jsx
 import { useTheme } from "@emotion/react";
 import { styled } from "@mui/material/styles";
-import { Box, Stack, Typography, Menu, MenuItem } from "@mui/material";
+import { Box, Stack, Typography, Menu, MenuItem, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReorderIcon from "@mui/icons-material/Reorder";
@@ -9,6 +10,7 @@ import Login from "./Login.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/userSlice";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import Cart from "./Cart.jsx";
 
 const StyledLink = styled(Link)(({ theme }) => ({
   color: theme.palette.white.main,
@@ -36,10 +38,8 @@ function HeaderPage() {
 
   const handleLogout = () => {
     dispatch(logout());
-    handleMenuClose();
+    handleMenuClose(); 
   };
-
-  console.log(user);
 
   return (
     <Box>
@@ -107,7 +107,12 @@ function HeaderPage() {
               <ReorderIcon />
             </StyledLink>
           </Stack>
-          <Stack flexDirection={"row"} sx={{ margin: "10px 30px 10px 0" }}>
+          <Stack 
+            flexDirection={"row"} 
+            alignItems="center"
+            sx={{ margin: "10px 30px 10px 0", gap: "15px" }}
+          >
+            <Cart />
             {user.isAuthenticated ? (
               <>
                 <Typography

@@ -5,10 +5,15 @@ const bookCopySchema = new mongoose.Schema({
   barcode: { type: String, unique: true, required: true }, // QR code
   status: {
     type: String,
-    enum: ["Available", "Borrowed", "Reserved", "Damaged", "Lost"],
+    enum: ["Available", "Borrowed", "Pending", "Reserved", "Lost"],
     default: "Available",
   },
-  location: { type: String }, // Vị trí kệ sách
+  condition: {
+    type: String,
+    enum: ['New', 'Good', 'Damaged'],
+    default: 'New'
+  },
+  location: { type: String, default: "" }, // Vị trí kệ sách
   importRecordId: { type: mongoose.Schema.Types.ObjectId, ref: "TransactionLog" }, // Lần nhập nào
 });
 

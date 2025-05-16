@@ -6,10 +6,10 @@ const transactionLogSchema = new mongoose.Schema({
     ref: "Book",
     required: true,
   },
-  barcode: { type: String, required: true }, // QR code của bản copy
+  barcode: { type: String }, // QR code của bản copy
   operationType: {
     type: String,
-    enum: ["Import", "Export", "Damage", "Lost"],
+    enum: ["Import", "Export", "Issue", "Return", "Lost"],
     required: true,
   },
   quantity: { type: Number, default: 1 }, // Số lượng (thường là 1 với sách vật lý)

@@ -14,6 +14,7 @@ import categoryService from "../services/categoryService";
 
 function Home(props) {
   const [categories, setCategories] = useState([]);
+  const [facultyies, setFacultyies] = useState([]);
   const [visible, setVisible] = useState(false);
   
   useEffect(() => {
@@ -22,7 +23,7 @@ function Home(props) {
         const response = await categoryService.getAllCategories();
 
         const fetchedCategories = response.map((category) => ({
-          link: `danh-muc/${category.id}`,
+          link: `danh-muc/${category._id}`,
           text: category.name,
         }));
 
@@ -37,28 +38,55 @@ function Home(props) {
         console.error("Error fetching categories:", error);
       }
     };
+    const fetchFacultyies = async () => {
+      try {
+        const response = await categoryService.getAllFetchFacultyies();
 
+        const fetchedFacultyies = response.map((category) => ({
+          link: `khoa/${category._id}`,
+          text: category.name,
+        }));
+
+        // Thêm mục "Xem tất cả" vào đầu mảng danh mục
+        const allFacultyies = [
+          { link: "/khoa", text: "Xem tất cả" }, // Mục "Xem tất cả"
+          ...fetchedFacultyies,
+        ];
+
+        setFacultyies(allFacultyies);
+      } catch (error) {
+        console.error("Error fetching Facultyies:", error);
+      }
+    };
+    fetchFacultyies();
     fetchCategories();
   }, []);
 
+  console.log(categories);
+
   const menuItems = [
     { link: "/", text: "Trang chủ", icon: <HomeIcon fontSize="medium" /> },
-    { link: "/tin-tuc", text: "Tin tức", icon: <FeedIcon fontSize="medium" /> },
-    {
-      link: "/sach-moi",
-      text: "Sách mới",
-      icon: <AutoStoriesIcon fontSize="medium" />,
-    },
+    // { link: "/tin-tuc", text: "Tin tức", icon: <FeedIcon fontSize="medium" /> },
+    // {
+    //   link: "/sach-moi",
+    //   text: "Sách mới",
+    //   icon: <AutoStoriesIcon fontSize="medium" />,
+    // },
     {
       text: "Danh mục",
       icon: <MenuBookIcon fontSize="medium" />,
       subItems: categories,
     },
     {
-      link: "sach-yeu-thich",
-      text: "Sách yêu thích",
-      icon: <FavoriteIcon fontSize="medium" />,
+      text: "Khoa",
+      icon: <MenuBookIcon fontSize="medium" />,
+      subItems: facultyies,
     },
+    // {
+    //   link: "sach-yeu-thich",
+    //   text: "Sách yêu thích",
+    //   icon: <FavoriteIcon fontSize="medium" />,
+    // },
   ];
 
   const toggleVisibility = () => {

@@ -1,0 +1,50 @@
+.container {
+    min-width: fit-content;
+    width: fit-content;
+    min-height: 100vh;
+    background-color: var(--color-13);
+    position: relative;
+    top: 0;
+    bottom: 0;
+    border-right: 1px solid var(--color-9);
+
+    > a {
+        width: 100%;
+        display: block;
+        color: var(--color-9);
+        padding: 15px 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    nav {
+        margin-top: 10px;
+        ul li a {
+            color: whitesmoke;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background-color 0.15s ease-in;
+            &:hover {
+                font-weight: 800;
+                background-color: var(--color-4);
+            }
+        }
+
+        ul li:last-child {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        ul li a .icon {
+            font-size: 30px;
+        }
+    }
+}

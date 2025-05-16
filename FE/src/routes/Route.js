@@ -6,20 +6,21 @@ import PageNotFound from '../pages/PageNotFound'
 import SearchPage from '../pages/SearchPage'
 import Feed from '../components/Feed'
 import CategoryAll from '../components/CategoryAll'
+import FacultyAll from '../components/FacultyAll'
 import BookDetails from '../components/BookDetails'
 import NewsDetail from '../components/NewsDetail'
 import Contact from '../pages/Contact'
 import Profile from '../components/Profile'
 import RentHistory from '../components/RentHistory'
-import News from '../components/News'
+// import News from '../components/News'
 import FavoritBooks from '../components/FavoriteBooks'
 import AllFavoriteBooks from '../components/AllFavoriteBooks'
-import UpdatePassword from '../components/UpdatePassword'
 import Punish from '../components/Punish'
 import BooksNew from '../components/BooksNew'
 import FormContact from "../components/ContactComponent/FormContact"
 import ContactList from "../components/ContactComponent/ContactList"
 import AboutUs from "../components/ContactComponent/AboutUs"
+import AdminPage from "../pages/AdminPage"
 
 
 export const router = createBrowserRouter([
@@ -36,10 +37,6 @@ export const router = createBrowserRouter([
         element: <SearchPage />
       },
       {
-        path: '/tin-tuc',
-        element: <News />
-      },
-      {
         path: '/sach-yeu-thich',
         element: <AllFavoriteBooks />
       },
@@ -54,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: '/danh-muc/:id',
         element: <CategoryAll />
+      },
+      {
+        path: '/khoa',
+        element: <FacultyAll />
+      },
+      {
+        path: '/khoa/:id',
+        element: <FacultyAll />
       },
       {
         path: '/chi-tiet-sach/:id', 
@@ -80,10 +85,6 @@ export const router = createBrowserRouter([
       {
         path: '/ho-so-doc-gia/phi-phat',
         element: <Punish />
-      },
-      {
-        path: '/ho-so-doc-gia/cap-nhat-mat-khau',
-        element: <UpdatePassword />
       },
       {
         path: '/ho-so-doc-gia/yeu-thich',
@@ -114,5 +115,9 @@ export const router = createBrowserRouter([
   {
     path: '*',
     element: <PageNotFound />
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />
   }
 ])

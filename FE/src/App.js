@@ -10,6 +10,7 @@ import { setUser } from './redux/slides/user/userSlide';
 // import axios from 'axios';
 import ProtectedRoute from './routes/protectedRoute';
 
+
 const queryClient = new QueryClient();
 
 function App() {
